@@ -39,7 +39,7 @@ import {ref, onMounted, onUnmounted, computed} from 'vue'
 
 export default function usePosition(){
   const x = ref(0)
-  function update(e){
+  function update(e:any){
     x.value = e.pageX
   }
   const double = computed(()=>x.value*2)
