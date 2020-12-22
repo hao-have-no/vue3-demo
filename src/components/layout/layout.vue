@@ -3,63 +3,17 @@
             <el-header style="text-align: right; font-size: 12px">
                 <el-dropdown>
                     <i class="el-icon-setting" style="margin-right: 15px"></i>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item>查看</el-dropdown-item>
-                            <el-dropdown-item>新增</el-dropdown-item>
-                            <el-dropdown-item>删除</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
                 </el-dropdown>
                 <span>王小虎</span>
             </el-header>
             <el-container>
-                <el-aside width="250px;">
-                    <el-menu :default-openeds="['1', '3']">
-                        <el-submenu index="1">
-                            <template v-slot:title><i class="el-icon-message"></i>导航一</template>
-                            <el-menu-item-group>
-                                <template v-slot:title>分组一</template>
-                                <el-menu-item index="1-1">选项1</el-menu-item>
-                                <el-menu-item index="1-2">选项2</el-menu-item>
+                <el-aside width="250px" v-if="menu.length">
+                    <el-menu :default-openeds="[menu[0]['id']]">
+                        <el-submenu :index="item.id" v-for="item in menu" :key="item.id">
+                            <template v-slot:title><i class="el-icon-message"></i>{{item.name}}{{item.id}}</template>
+                            <el-menu-item-group v-if="item.children.length">
+                                <el-menu-item @click="goPage(btn.type)" v-for="btn in item.children" :index="btn.id" :key="btn.id">{{btn.name}}</el-menu-item>
                             </el-menu-item-group>
-                            <el-menu-item-group title="分组2">
-                                <el-menu-item index="1-3">选项3</el-menu-item>
-                            </el-menu-item-group>
-                            <el-submenu index="1-4">
-                                <template v-slot:title>选项4</template>
-                                <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-                            </el-submenu>
-                        </el-submenu>
-                        <el-submenu index="2">
-                            <template v-slot:title><i class="el-icon-menu"></i>导航二</template>
-                            <el-menu-item-group>
-                                <template v-slot:title>分组一</template>
-                                <el-menu-item index="2-1">选项1</el-menu-item>
-                                <el-menu-item index="2-2">选项2</el-menu-item>
-                            </el-menu-item-group>
-                            <el-menu-item-group title="分组2">
-                                <el-menu-item index="2-3">选项3</el-menu-item>
-                            </el-menu-item-group>
-                            <el-submenu index="2-4">
-                                <template v-slot:title>选项4</template>
-                                <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-                            </el-submenu>
-                        </el-submenu>
-                        <el-submenu index="3">
-                            <template v-slot:title><i class="el-icon-setting"></i>导航三</template>
-                            <el-menu-item-group>
-                                <template v-slot:title>分组一</template>
-                                <el-menu-item index="3-1">选项1</el-menu-item>
-                                <el-menu-item index="3-2">选项2</el-menu-item>
-                            </el-menu-item-group>
-                            <el-menu-item-group title="分组2">
-                                <el-menu-item index="3-3">选项3</el-menu-item>
-                            </el-menu-item-group>
-                            <el-submenu index="3-4">
-                                <template v-slot:title>选项4</template>
-                                <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-                            </el-submenu>
                         </el-submenu>
                     </el-menu>
                 </el-aside>
@@ -72,9 +26,44 @@
 
 <script lang="ts">
   import {ElContainer,ElHeader} from "element3";
+  import { useRoute,useRouter } from "vue-router";
   export default {
     name: "layout",
-    components: { ElContainer,ElHeader }
+    components: { ElContainer,ElHeader },
+
+    setup(){
+      const route = useRoute();
+      const router = useRouter();
+
+      const goPage=((type:any)=>{
+        router.push({name:type})
+      });
+
+      return {goPage}
+    },
+
+    data(){
+      return{
+        menu:[
+          {id:'1',name:'正文',children:[
+              {
+                id:'1-1',name:'正文1',type:'About',children:[]
+              },{
+                id:'1-2',name:'正文2',children:[]
+              }
+            ]},
+          {id:'2',name:'实验',children:[
+              {
+                id:'2-1',name:'探探飞卡',type:'tanCard',children:[]
+              },{
+                id:'2-2',name:'知乎侧飞',type:'zhiCard',children:[]
+              }, {
+                id:'2-3',name:'vue3飞卡',type:'flexCard',children:[]
+              }
+            ]}
+        ]
+      }
+    },
   };
 </script>
 
