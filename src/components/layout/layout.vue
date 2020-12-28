@@ -49,12 +49,12 @@
               {
                 id:'1-1',name:'正文1',type:'About',children:[]
               },{
-                id:'1-2',name:'正文2',children:[]
+                id:'1-2',name:'正文2',type:'Home',children:[]
               }
             ]},
           {id:'2',name:'实验',children:[
               {
-                id:'2-1',name:'探探飞卡',type:'tanCard',children:[]
+                id:'2-1',name:'探探飞卡',type:'TanCard',children:[]
               },{
                 id:'2-2',name:'知乎侧飞',type:'zhiCard',children:[]
               }, {
