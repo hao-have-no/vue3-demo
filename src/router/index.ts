@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path:'/tanCard',
     name:"TanCard",
     component:()=>import("../views/QuesCard.vue")
+  },
+  {
+    path:'/apiDemo',
+    name:"apiDemo",
+    component:()=>import("../views/ApiUseDemo.vue")
   }
 ];
 

@@ -47,9 +47,10 @@
         menu:[
           {id:'1',name:'正文',children:[
               {
-                id:'1-1',name:'正文1',type:'About',children:[]
-              },{
-                id:'1-2',name:'正文2',type:'Home',children:[]
+                id:'1-1',name:'composition实验',type:'About',children:[],
+              },
+              {
+                id:'1-2',name:'常用的vue3Api实验',type:'apiDemo',children:[],
               }
             ]},
           {id:'2',name:'实验',children:[

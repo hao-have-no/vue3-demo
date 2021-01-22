@@ -2,6 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <h2>composition 组合避免横跳，便于维护</h2>
+    <div>另外实验vue2-mixins（混入）和vue3的composition(函数级声明)</div>
     <input type="text" v-model="val" @keyup.enter="addTodo">
     <ul>
       <li v-for="todo in todos" :key="todo.id">{{todo.title}}</li>
@@ -61,9 +62,10 @@ export default{
     const {x,double:doubleX} = usePosition();
 
     function addTodo(){
+      const value = val.value;
       todos.push({
         id:todos.length,
-        title:val,
+        title:value,
         done:false
       });
       val.value = ''; //ref响应式的独特赋值

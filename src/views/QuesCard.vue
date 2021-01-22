@@ -105,6 +105,8 @@
         this.actionName = "";
       },
       onCardThrowDone(obj) {
+        const temp = this.cards[0];
+        this.cards.push(temp);
         this.cards.splice(0, 1);
       },
     }
